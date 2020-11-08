@@ -1,0 +1,33 @@
+#!/bin/bash
+
+type(){
+	for (( i=0; i < ${#1}; i++ )); do
+		printf "%s" "${1:i:1}"
+		sleep 0.01
+	done
+	printf "\n"
+ }
+
+clear
+echo
+echo
+echo -ne "\e[31m"
+type "=====    Hritik Vijay   ===="
+echo -ne "\e[0m"
+type
+type "A tinkerer and cyber security enthusiast."
+type
+type "I have had experience in multiple tech fields. In the end - as of now - I landed in cyber security"
+type "I love looking at the insides of every tech I can"
+type "Recently, I've achieved CVE-2020-6862"
+type "I'm a big time linux supporter. Arch Linux, to be very precise."
+type "Simple is better than complex. Complex is better than complicated - Zen of Python"
+type ""
+type "If you happen to find any discrepancy or have a suggestion during the presentation, feel free to contact me"
+
+echo -ne "\e[34mTwitter:"
+echo -en "\e[0m"
+type " @MrHritik"
+echo -ne "\e[32mMail:"
+echo -en "\e[0m"
+type " hr1t1k@pm.me"

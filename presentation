@@ -1,0 +1,184 @@
+@img/bg.jpg
+
+
+SSH - Secure Shell
+# SSH is secure shell, a protocol which is wildly used in current era. From git to remote connections.
+
+whoami ?
+
+OpenSSH - OpenBSD Secure Shell
+# A suite of SSH utilites. Our main point of discussion today.
+# Found in most Linux/Mac OS by default.
+# ASSUME: Preconfigured ssh server
+# Let's connect
+
+$ ssh user@hostname
+# Let's see what I can do.
+# I can.... basically do anything. I've entire control to the device.
+
+TRY IT
+
+$ ssh wos@52.47.163.42
+#< CONNECT TO PARIS >
+
+
+# Let's try connecting to my phone
+Android Shell
+$ ssh -i android.pem u0_a185@ip_address -p 2222
+# Here are a few things to this command. I'll come back to this later on.
+# First, let's enjoy
+
+$ am start --user 0 -n com.android.calculator2/.Calculator
+# A calculator popups up. The audience cheers in joy. The whole auditorim is lit up
+
+$ ssh -i android.pem u0_a185@ip_address -p 2222
+$ ssh -i KEY USER@ip_address -p PORT
+
+Public Key Authentication
+
+@img/pubpriv.png
+
+@img/pubprivcycle.png
+
+ssh-keygen
+
+@img/ssh-keygen.png
+
+-p 2222 i.e. port 2222
+
+$ ssh -i android.pem u0_a185@ip_address -p 2222
+# Now, I guess this command makes a lot more sense!
+
+Story Time
+
+@img/meetneo.png
+
+@img/mach0think.png
+# Logging enabled
+
+SSH can work as a proxy
+
+$ ssh -TD 4711 user@host
+
+-T: Don't need a terminal
+-D: Enable proxy on following local port
+
+@img/mach0done.png
+
+@img/needgui.png
+
+Neo has has full fleged GUI installation in Paris
+
+Remote Desktop / RDP ?
+
+But he only knows SSH
+
+SSH X11 Forwarding
+# The X is reponsible for all the GUI on you Linux based operating system.
+# (What is X? : https://unix.stackexchange.com/questions/276168/what-is-x11-exactly)
+# Yes, SSH can forward that too.
+# NOTE: Heavy bandwidth, use VNC
+
+Using the GUI, Neo has retrived data to develop a secret website
+The website shares data available near Mach 0.
+# He wants to use this for some secret communications.
+# Cannot trasfer the website, as it needs to be hosted near Mach 0
+# Cannot host it on his current computer, the machines would detect location and kill him
+
+Any idea ?
+# Send via live chat.
+
+SSH Port Forwarding
+# SSH can forward remote ports to local and vice versa
+
+$ ssh -R 1337:localhost:80 user@host
+
+Connection -> remote:1337 -> local -> localhost:80
+# Of course, reverse is also possible
+# TODO: Develop website
+
+The data is being captured from Mach0 and transmitted
+Pat yourselves on the back
+# Neo keeps going on
+
+@img/fall.png
+
+@img/hurt.png
+
+SSH Configuration file
+# Comes very handly to save SSH details
+
+~/.ssh/config
+
+@img/config.png
+# Let's write one config for our paris server
+# DO: Write config W/O Key
+
+Still gotta write the password though
+
+Remember Public/Private key ?
+
+Let's add one
+# DO: ssh-keygen on paris
+# 	: authorized_hosts
+
+[wos@paris .ssh]$ ssh-keygen
+[wos@paris .ssh]$ cat id_rsa.pub > authorized_keys
+
+
+@img/needprivkey.png
+
+File Transfer: SCP
+# SSH can transfer files too!!
+
+$ scp paris:~/.ssh/id_rsa paris_key
+# Add key to config
+
+Doesn't work?
+
+PRIVATE KEY (paris_key): strict access
+authorized_keys: strict access
+
+$ chmod 600 ~/.ssh/paris_key
+[wos@paris ~]$ chmod 600 ~/.ssh/authorized_keys
+
+@img/pheww.png
+
+# Neo goes on
+# Next comes the FINAL server: Mach 1337!
+@img/mach1337.png
+
+Mach 1337 keeps on tracing IP
+# Play: https://www.youtube.com/watch?v=AuFCc7avTdQ
+
+Jump Hosts
+
+Paris : 52.47.163.42
+Mumbai: 13.232.211.39
+London: 18.134.151.143
+\
+User: wos
+Password: hritik
+
+
+ssh -J mumbai,paris london
+# Connects to mumbai via london->paris
+
+Jump hosts + Proxy
+# LIVE
+
+Step 0: Create ~/.ssh/config file
+
+Step 1: $ ssh -J mumbai,paris london -TD 4711
+
+Step 2: Profit!
+
+@img/mach1337done.png
+
+@img/help.png
+
+Tmate
+
+$ tmate
+
+@img/thankyou.png
